@@ -1,36 +1,38 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	console.log('Up and running!');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "css-finder" is now active!');
+	const provider = vscode.languages.registerDefinitionProvider({ scheme: 'file', language: 'html' }, {
+		async provideDefinition(document, position, token) {
+			const range = document.getWordRangeAtPosition(position);
+			const selection = document.getText(range);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('css-finder.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+			if(!selection) {
+				return null;
+			}
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from CSS Finder!');
-	});
+			const cssFiles = await vscode.workspace.findFiles('**/*.css');
 
-	context.subscriptions.push(disposable);
+			cssFiles.forEach(async (fileUri) => {
+				const cssText = await vscode.workspace.openTextDocument(fileUri);
+				const rawText = cssText.getText();
+				console.log(fileUri.fsPath + " " + rawText);
+			})
+
+
+
+		}});
+
+	context.subscriptions.push(provider);
 }
 
-// This method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {
 	activate,
-	deactivate
+	deactivate,
 }
