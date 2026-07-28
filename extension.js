@@ -20,23 +20,21 @@ function activate(context) {
 			const cssFiles = await vscode.workspace.findFiles('**/*.css');
 			
 	
-				cssFiles.forEach(async (fileUri) => {
-					const cssText = await vscode.workspace.openTextDocument(fileUri);
-					const text = cssText.getText();
+			for(const fileUri of cssFiles){
+				const cssText = await vscode.workspace.openTextDocument(fileUri);
+				const text = cssText.getText();
 	
-					const search = new RegExp(`${text}`).toString();
+				const search = new RegExp(`${text}`).toString();
+				
+				console.log(search);
+	
+				if(selectRegexp.test(search)){
+					console.log("found")
+				} else {
+					console.log("no findings :(")
+				};
+			}
 					
-					console.log(search);
-
-					if(selectRegexp.test(search)){
-						console.log("found")
-					} else {
-						console.log("no findings :(")
-					};
-
-				});
-				
-				
 			
 			console.log(selection);
 		}});
