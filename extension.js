@@ -20,23 +20,22 @@ function activate(context) {
 			const cssFiles = await vscode.workspace.findFiles('**/*.css');
 			
 	
-			for(const fileUri of cssFiles){
-				const cssText = await vscode.workspace.openTextDocument(fileUri);
+			for(const oneFile of cssFiles){
+				const cssText = await vscode.workspace.openTextDocument(oneFile);
 				const text = cssText.getText();
-	
-				const search = new RegExp(`${text}`).toString();
-				
-				console.log(search);
-	
-				if(selectRegexp.test(search)){
+
+
+				if(text.search(selectRegexp)){
 					console.log("found")
 				} else {
 					console.log("no findings :(")
+					vscode.window.showInformationMessage(`Found no elements named: ${selectRegexp}!`);
 				};
+				
+				return new vscode.Location(oneFile, cssText.positionAt(1));
+
 			}
 					
-			
-			console.log(selection);
 		}});
 
 	context.subscriptions.push(provider);
