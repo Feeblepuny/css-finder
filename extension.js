@@ -11,6 +11,8 @@ function activate(context) {
 			const range = document.getWordRangeAtPosition(position);
 			const selection = document.getText(range);
 
+			let bool = false;
+
 			if(!selection) {
 				return null;
 			}
@@ -20,11 +22,19 @@ function activate(context) {
 			cssFiles.forEach(async (fileUri) => {
 				const cssText = await vscode.workspace.openTextDocument(fileUri);
 				const rawText = cssText.getText();
-				console.log(fileUri.fsPath + " " + rawText);
-			})
 
+				const search = new RegExp(`${selection}`).toString();
+				console.log(search);
 
+				if(search.match(rawText)){
+					bool = true;
+				}
 
+				return bool;
+				// console.log(fileUri.fsPath + " " + rawText);
+			});
+			
+			console.log(bool + " " + selection);
 		}});
 
 	context.subscriptions.push(provider);
