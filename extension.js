@@ -11,30 +11,34 @@ function activate(context) {
 			const range = document.getWordRangeAtPosition(position);
 			const selection = document.getText(range);
 
-			let bool = false;
+			const selectRegexp = new RegExp(`${selection}`);
 
 			if(!selection) {
 				return null;
 			}
 
 			const cssFiles = await vscode.workspace.findFiles('**/*.css');
-
-			cssFiles.forEach(async (fileUri) => {
-				const cssText = await vscode.workspace.openTextDocument(fileUri);
-				const rawText = cssText.getText();
-
-				const search = new RegExp(`${selection}`).toString();
-				console.log(search);
-
-				if(search.match(rawText)){
-					bool = true;
-				}
-
-				return bool;
-				// console.log(fileUri.fsPath + " " + rawText);
-			});
 			
-			console.log(bool + " " + selection);
+	
+				cssFiles.forEach(async (fileUri) => {
+					const cssText = await vscode.workspace.openTextDocument(fileUri);
+					const text = cssText.getText();
+	
+					const search = new RegExp(`${text}`).toString();
+					
+					console.log(search);
+
+					if(selectRegexp.test(search)){
+						console.log("found")
+					} else {
+						console.log("no findings :(")
+					};
+
+				});
+				
+				
+			
+			console.log(selection);
 		}});
 
 	context.subscriptions.push(provider);
