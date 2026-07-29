@@ -4,7 +4,7 @@ Hold CTRL and click on any element to automatically take you to the line of code
 
 <img width="764" height="568" alt="gifRecording" src="https://github.com/user-attachments/assets/f5975c86-e067-4653-bb0b-0dde2aacd123" />
 
-This small project was mainly done as way of learning, and by no way is it a fully functioning extension. 
+This small project was mainly done as way of learning, and by no way is it a fully functioning extension. I might update more in the future, however, as it stands it will do 
 ## Features
   - Reads through multiple CSS files 
   - Can detect both main HTML elements, ID, and Classes 
