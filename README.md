@@ -1,4 +1,4 @@
-# CSSFinder
+# CSSLocator
 Simple VSExtension that moves the user to their CSS when clicking on an HTML element
 Hold CTRL and click on any element to automatically take you to the line of code in CSS! Note, this only pertains to already written CSS as it does not write for those that do not exist prior.
 
@@ -17,5 +17,5 @@ This small project was mainly done as way of learning, and by no way is it a ful
 ## Release Notes
 ### 1.0.0
 
-Initial release of CSSFinder 
+Initial release of CSSLocator 
 
