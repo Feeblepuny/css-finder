@@ -24,13 +24,14 @@ function activate(context) {
 				const search = new RegExp(`${text}`).toString();
 
 				if(!selectRegexp.test(search)){
-					vscode.window.showInformationMessage(`Found no elements named: ${selectRegexp}!`);
+					return null;
 				} else {
-					const index = text.search(selectRegexp);
+					const index = search.search(selectRegexp);
+	
+
 					return new vscode.Location(oneFile, cssText.positionAt(index));
-				};
+				}; 
 			}
-					
 		}});
 
 	context.subscriptions.push(provider);

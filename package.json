@@ -1,22 +1,21 @@
 {
   "name": "css-finder",
   "displayName": "CSS Finder",
-  "description": "Find your css line by clicking on the html element ",
-  "version": "0.0.1",
+  "description": "Find your css line by clicking on the html element",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.125.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Feeblepuny/css-finder.git"
   },
   "categories": [
     "Other"
   ],
+  "icon": "CSSFinderLogo.ico",
   "activationEvents": ["onLanguage:html"],
   "main": "./extension.js",
-  "contributes": {
-    "commands": [{
-      "command": "css-finder.helloWorld",
-      "title": "Hello World"
-    }]
-  },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
