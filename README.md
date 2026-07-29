@@ -6,6 +6,7 @@ Hold CTRL and click on any element to automatically take you to the line of code
 
 This small project was mainly done as way of learning, and by no way is it a fully functioning extension. 
 ## Features
+  Reads through multiple CSS files 
   Can detect both main HTML elements, ID, and Classes 
   Holding CTRL will highlight if any lines of CSS with that name exists
   
