@@ -4,10 +4,8 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	console.log('Up and running!');
-
 	const provider = vscode.languages.registerDefinitionProvider({ scheme: 'file', language: 'html' }, {
-		async provideDefinition(document, position, token) {
+		async provideDefinition(document, position) {
 			const range = document.getWordRangeAtPosition(position);
 			const selection = document.getText(range);
 
@@ -22,12 +20,12 @@ function activate(context) {
 			for(const oneFile of cssFiles){
 				const cssText = await vscode.workspace.openTextDocument(oneFile);
 				const text = cssText.getText();
+				
+				const search = new RegExp(`${text}`).toString();
 
-				if(!text.search(selectRegexp)){
-					console.log("no findings :(")
+				if(!selectRegexp.test(search)){
 					vscode.window.showInformationMessage(`Found no elements named: ${selectRegexp}!`);
 				} else {
-					console.log("found")
 					const index = text.search(selectRegexp);
 					return new vscode.Location(oneFile, cssText.positionAt(index));
 				};
