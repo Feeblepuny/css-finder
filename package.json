@@ -1,7 +1,8 @@
 {
-  "name": "css-finder",
-  "displayName": "CSS Finder",
+  "name": "css-locator",
+  "displayName": "CSSLocator",
   "description": "Find your css line by clicking on the html element",
+  "publisher": "FiliphAE",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.125.0"
