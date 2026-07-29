@@ -18,22 +18,19 @@ function activate(context) {
 			}
 
 			const cssFiles = await vscode.workspace.findFiles('**/*.css');
-			
 	
 			for(const oneFile of cssFiles){
 				const cssText = await vscode.workspace.openTextDocument(oneFile);
 				const text = cssText.getText();
 
-
-				if(text.search(selectRegexp)){
-					console.log("found")
-				} else {
+				if(!text.search(selectRegexp)){
 					console.log("no findings :(")
 					vscode.window.showInformationMessage(`Found no elements named: ${selectRegexp}!`);
+				} else {
+					console.log("found")
+					const index = text.search(selectRegexp);
+					return new vscode.Location(oneFile, cssText.positionAt(index));
 				};
-				
-				return new vscode.Location(oneFile, cssText.positionAt(1));
-
 			}
 					
 		}});
